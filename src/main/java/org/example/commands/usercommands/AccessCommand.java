@@ -1,6 +1,6 @@
 package org.example.commands.usercommands.accesscontrol;
 
-import org.example.auxiliaryclasses.RoleCallback;
+import org.example.ApplicationContext;
 import org.example.commands.Command;
 import org.example.entities.Role;
 import org.example.entities.User;
@@ -15,13 +15,12 @@ import static org.example.auxiliaryclasses.PasswordUtil.checkPassword;
 public class AccessCommand implements Command {
     private final DataProvider dataProvider;
     private final Scanner scanner;
-    private final RoleCallback roleCallback;
 
 
-    public AccessCommand(DataProvider dataProvider, Scanner scanner, RoleCallback roleCallback) {
+    public AccessCommand(DataProvider dataProvider, Scanner scanner) {
         this.dataProvider = dataProvider;
         this.scanner = scanner;
-        this.roleCallback = roleCallback;
+
     }
 
     @Override
@@ -34,9 +33,7 @@ public class AccessCommand implements Command {
                 String name = scanner.nextLine();
                 System.out.println("Please enter your password:");
                 String password = scanner.nextLine();
-                Method method = dataProvider.getUserService().getClass().
-                        getDeclaredMethod("authentication", String.class, String.class);
-                Boolean isAuthenticated = (Boolean) method.invoke(dataProvider.getUserService(), name, password);
+                Boolean isAuthenticated = dataProvider.getUserService().authentication(name, password);
                 if (isAuthenticated) {
                     System.out.println("You have successfully logged in!");
                     for (User user : dataProvider.getUserService().getAllUsers()) {
@@ -53,13 +50,15 @@ public class AccessCommand implements Command {
                     getDeclaredMethod("authorization", Long.class);
             Role role = (Role) method.invoke(dataProvider.getUserService(), userId);
             if (role != null) {
-                System.out.println("You get role: " + role);
-                roleCallback.onRoleRetrieved(role);
+                System.out.println("You get role: " + role.getRoleName());
             }
             else {
                 System.out.println("Error with getting role");
             }
-
+            User user = dataProvider.getUserService().getUser(userId);
+            ApplicationContext.setUser(user);
+            ApplicationContext.setRole(role);
+            System.out.println("If you want to log off type: exit");
         } catch (NoSuchMethodException e) {
             System.out.println("Error executing access command");
         } catch (InvocationTargetException e) {

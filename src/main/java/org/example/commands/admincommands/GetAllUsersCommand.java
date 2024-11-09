@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GetAllUsersCommand implements Command {
 
-    private DataProvider dataProvider;
+    private final DataProvider dataProvider;
 
     public GetAllUsersCommand(DataProvider dataProvider) {
         this.dataProvider = dataProvider;
