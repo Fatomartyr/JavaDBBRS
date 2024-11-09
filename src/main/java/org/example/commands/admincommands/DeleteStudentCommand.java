@@ -1,4 +1,4 @@
-package org.example.commands.studentcommands;
+package org.example.commands.admincommands;
 
 import org.example.commands.Command;
 import org.example.provider.DataProvider;

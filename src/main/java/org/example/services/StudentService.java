@@ -2,14 +2,17 @@ package org.example.services;
 
 import org.example.entities.Student;
 import org.example.repository.implementations.inmemory.StudentRepo;
+import org.example.repository.interfaces.IAttendanceRepo;
 import org.example.repository.interfaces.IStudentRepo;
 
 import java.util.List;
 
 public class StudentService {
     private IStudentRepo studentRepo;
-    public StudentService(StudentRepo studentRepo) {
+    private IAttendanceRepo attendanceRepo;
+    public StudentService(StudentRepo studentRepo, IAttendanceRepo attendanceRepo) {
         this.studentRepo = studentRepo;
+        this.attendanceRepo = attendanceRepo;
     }
     public Student getStudent(Long id) {
         return studentRepo.getStudent(id);
@@ -28,5 +31,8 @@ public class StudentService {
     }
     public Long getMaxStudentId() {
         return studentRepo.getAllStudents().stream().map(Student::getId).max(Long::compare).orElse(0L);
+    }
+    public String getAttendance(Long id, String subjectName) {
+        return attendanceRepo.getPercentAttendance(id, subjectName) + " %";
     }
 }

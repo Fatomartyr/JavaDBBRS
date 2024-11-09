@@ -39,4 +39,9 @@ public class RoleRepo implements IRoleRepo {
     public void deleteRole(Long roleId) {
         roles.removeIf(role -> role.getRoleId().equals(roleId));
     }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return roles;
+    }
 }

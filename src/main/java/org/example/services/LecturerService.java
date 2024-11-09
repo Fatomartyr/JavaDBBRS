@@ -2,10 +2,12 @@ package org.example.services;
 
 import org.example.entities.Lecturer;
 import org.example.repository.implementations.inmemory.LecturerRepo;
+import org.example.repository.interfaces.IAttendanceRepo;
 import org.example.repository.interfaces.ILecturerRepo;
 
 public class LecturerService {
     private ILecturerRepo lecturerRepo;
+    private IAttendanceRepo attendanceRepo;
     public LecturerService(LecturerRepo lecturerRepo) {
         this.lecturerRepo = lecturerRepo;
     }

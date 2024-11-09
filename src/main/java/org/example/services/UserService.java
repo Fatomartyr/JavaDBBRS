@@ -1,5 +1,6 @@
 package org.example.services;
 
+import lombok.Getter;
 import org.example.auxiliaryclasses.PasswordUtil;
 import org.example.entities.Role;
 import org.example.entities.User;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class UserService {
     private IUserRepo userRepo;
+    @Getter
     private IRoleRepo roleRepo;
     public UserService(UserRepo userRepo, RoleRepo roleRepo) {
         this.userRepo = userRepo;
@@ -54,8 +56,13 @@ public class UserService {
     }
 
     public Boolean checkPassword(String rawPassword, String hashedPassword) {
-        rawPassword = PasswordUtil.hashPassword(rawPassword);
         return PasswordUtil.checkPassword(rawPassword, hashedPassword);
     }
 
+    public Long getMaxUserId() {
+        return userRepo.getAllUsers().stream().map(User::getId).max(Long::compare).orElse(0L);
+    }
+    public Long getMaxRoleId() {
+        return roleRepo.getAllRoles().stream().map(Role::getRoleId).max(Long::compare).orElse(0L);
+    }
 }

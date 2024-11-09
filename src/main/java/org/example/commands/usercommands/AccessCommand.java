@@ -1,4 +1,4 @@
-package org.example.commands.usercommands.accesscontrol;
+package org.example.commands.usercommands;
 
 import org.example.ApplicationContext;
 import org.example.commands.Command;

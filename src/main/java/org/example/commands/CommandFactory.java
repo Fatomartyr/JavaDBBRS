@@ -1,18 +1,14 @@
 package org.example.commands;
 
-import org.example.commands.studentcommands.*;
-import org.example.commands.usercommands.GetAllUsersCommand;
-import org.example.commands.usercommands.GetUserCommand;
-import org.example.commands.usercommands.accesscontrol.AccessCommand;
+import org.example.commands.admincommands.*;
+import org.example.commands.admincommands.GetAllUsersCommand;
+import org.example.commands.admincommands.GetUserCommand;
+import org.example.commands.studentcommands.GetStudentAttendanceCommand;
+import org.example.commands.usercommands.AccessCommand;
 import org.example.provider.DataProvider;
-import org.example.entities.Role;
-import org.example.view.StudentView;
-import org.example.view.UserView;
-
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class CommandFactory {
@@ -25,13 +21,11 @@ public class CommandFactory {
         commands.put(CommandsList.getAllStudents, new GetAllStudentsCommand(dataProvider));
         commands.put(CommandsList.getUser, new GetUserCommand(dataProvider, scanner));
         commands.put(CommandsList.getAllUsers, new GetAllUsersCommand(dataProvider));
-        commands.put(CommandsList.accessControl, new AccessCommand(dataProvider, scanner, role -> {
-            if (Objects.equals(role.getRoleName(), "Student")) {
-                new StudentView(dataProvider, scanner).display();
-            } else if (Objects.equals(role.getRoleName(), "User")) {
-                new UserView(dataProvider, scanner).display();
-            }
-        }));
+        commands.put(CommandsList.addUser, new AddUserCommand(dataProvider, scanner));
+        commands.put(CommandsList.accessControl, new AccessCommand(dataProvider, scanner));
+        commands.put(CommandsList.updateUser, new UpdateUserCommand(dataProvider, scanner));
+        commands.put(CommandsList.deleteUser, new DeleteUserCommand(dataProvider, scanner));
+        commands.put(CommandsList.getStudentAttendance, new GetStudentAttendanceCommand(dataProvider, scanner));
     }
 
     public Command getCommand(CommandsList command) {

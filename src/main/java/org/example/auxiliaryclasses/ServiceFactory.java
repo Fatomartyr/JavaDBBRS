@@ -71,7 +71,7 @@ public class ServiceFactory {
         return new StudentGroupService(studentGroupRepo);
     }
     public StudentService createStudentService() {
-        return new StudentService(studentRepo);
+        return new StudentService(studentRepo, attendanceRepo);
     }
     public SubjectService createSubjectService() {
         return new SubjectService(subjectRepo);

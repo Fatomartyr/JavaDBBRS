@@ -7,11 +7,11 @@ import org.example.commands.CommandFactory;
 
 import java.util.Scanner;
 
-public class StudentView implements IConsoleView {
+public class AdminView implements IConsoleView {
     private final CommandFactory commandFactory;
     private final Scanner scanner;
 
-    public StudentView(DataProvider dataProvider, Scanner scanner) {
+    public AdminView(DataProvider dataProvider, Scanner scanner) {
         this.scanner = scanner;
         this.commandFactory = new CommandFactory(dataProvider, scanner);
     }
@@ -22,7 +22,7 @@ public class StudentView implements IConsoleView {
     }
 
     private void handleChoice() {
-        System.out.println("Select a student command");
+        System.out.println("Select an admin command");
         CommandsList[] commands = CommandsList.values();
         for (int i = 0; i < commands.length; i++) {
             if (commands[i].getViewType() == ViewType.ADMIN) {
@@ -40,7 +40,7 @@ public class StudentView implements IConsoleView {
             }
         }
         int commandIndex = scanner.nextInt();
-        while (commandIndex < 1 || commandIndex > 5) {
+        while (commandIndex < 1 || commandIndex > 10) {
             System.out.println("Invalid command number! Try again");
             commandIndex = scanner.nextInt();
         }
@@ -48,10 +48,12 @@ public class StudentView implements IConsoleView {
         try {
             CommandsList commandType = commands[commandIndex];
             if (commandType.getViewType() == ViewType.ADMIN) {
+                System.out.println(commandIndex);
+                System.out.println(commandType.name());
                 Command command = commandFactory.getCommand(commandType);
                 command.execute();
             } else {
-                System.out.println("Invalid command for StudentView");
+                System.out.println("Invalid command for AdminView");
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Invalid command");

@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MockDatabase {
     private final AttendanceRepo attendanceRepo = new AttendanceRepo(initializeAttendanceRepo());
     private final CourseRepo courseRepo = new CourseRepo(initializeCourseRepo());
@@ -84,11 +85,11 @@ public class MockDatabase {
 
     private List<Role> initializeRoleRepo() {
         List<Role> roles = new ArrayList<>();
-        roles.add(new Role(1L, 1L, "Student"));
-        roles.add(new Role(2L, 2L, "Admin"));
+        roles.add(new Role(1L, 1L, "Admin"));
+        roles.add(new Role(2L, 2L, "Student"));
         roles.add(new Role(3L, 1L, "Lecturer"));
         roles.add(new Role(4L, 3L, "Student"));
-        roles.add(new Role(5L, 4L, "Admin"));
+        roles.add(new Role(5L, 4L, "Lecturer"));
         return roles;
     }
 
@@ -158,11 +159,16 @@ public class MockDatabase {
     }
     private List<User> initializeUserRepo() {
         List<User> users = new ArrayList<>();
-        users.add(new User(1L, "admin", "admin123"));
-        users.add(new User(2L, "john_doe", "password1"));
-        users.add(new User(3L, "jane_doe", "password2"));
-        users.add(new User(4L, "alice_smith", "alice2024"));
-        users.add(new User(5L, "bob_jones", "bob2024"));
+        String hashedAdminPassword = "$2a$10$550SdgK3Cob2OVMDlnxBK.RNMhINvLxob1R1KY9QFeO88woaI9nTK";
+        String hashedJohn_Doe = "$2a$10$yAbtN2WWa2TvTH5WR0PLTubLvKrElCNOghTEdFJ29XFwc/FSmc1j6";
+        String hashedJana_Doe = "$2a$10$qFF31DFhuFO/zgAfXLjhj.eeSSWSVa3uCPAXQGI2DuXPW.4aybVeq";
+        String hashedAlice_smith = "$2a$10$BuoWx4ml32mTEbg8LHNYq.x0pKCe8t5W4KtITuHMOhLp8FO2RXrQ2";
+        String hashedBob_jones = "$2a$10$IjHxE2YAWpzDCDbuZJsxJO1wBnMOyFH1rlyX9mjQRKHoqWzhmrTbG";
+        users.add(new User(1L, "admin", hashedAdminPassword));
+        users.add(new User(2L, "john_doe", hashedJohn_Doe));
+        users.add(new User(3L, "jane_doe", hashedJana_Doe));
+        users.add(new User(4L, "alice_smith", hashedAlice_smith));
+        users.add(new User(5L, "bob_jones", hashedBob_jones));
         return users;
     }
 }

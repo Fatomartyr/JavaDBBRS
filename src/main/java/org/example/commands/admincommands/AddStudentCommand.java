@@ -1,4 +1,4 @@
-package org.example.commands.studentcommands;
+package org.example.commands.admincommands;
 
 import org.example.commands.Command;
 import org.example.entities.Student;
@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import static org.example.commands.studentcommands.ParseStudent.parseStudent;
+import static org.example.commands.admincommands.ParseStudent.parseStudent;
 
 public class AddStudentCommand implements Command {
     private final DataProvider dataProvider;

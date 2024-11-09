@@ -10,9 +10,6 @@ public class AttendanceService {
     public AttendanceService(AttendanceRepo attendanceRepo) {
         this.attendanceRepo = attendanceRepo;
     }
-    public String getPercentAttendance(Long studentId, String subjectName) {
-        return attendanceRepo.getPercentAttendance(studentId, subjectName) + " %";
-    }
     public Attendance getAttendance(Long attendanceId) {
         return attendanceRepo.getAttendance(attendanceId);
     }
