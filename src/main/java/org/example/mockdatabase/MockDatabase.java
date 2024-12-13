@@ -9,6 +9,7 @@ import org.example.repository.implementations.inmemory.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -75,11 +76,11 @@ public class MockDatabase {
 
     private List<Lecturer> initializeLecturerRepo() {
         List<Lecturer> lecturers = new ArrayList<>();
-        lecturers.add(new Lecturer(1L, 101L, 1L, "James Parker", "james.parker@example.com", "+1234567890", "degree1"));
-        lecturers.add(new Lecturer(2L, 102L, 1L, "Sarah Wilson", "sarah.wilson@example.com", "+1234567891", "degree2"));
-        lecturers.add(new Lecturer(3L, 103L, 2L, "David Taylor", "david.taylor@example.com", "+1234567892", "degree3"));
-        lecturers.add(new Lecturer(4L, 104L, 2L, "Laura Evans", "laura.evans@example.com", "+1234567893", "degree4"));
-        lecturers.add(new Lecturer(5L, 105L, 3L, "Emily Brown", "emily.brown@example.com", "+1234567894", "degree5"));
+        lecturers.add(new Lecturer(1L, Arrays.asList(1L, 2L), 101L, 1L, "James Parker", "james.parker@example.com", "+1234567890", "degree1"));
+        lecturers.add(new Lecturer(2L, Arrays.asList(3L),  102L, 1L, "Sarah Wilson", "sarah.wilson@example.com", "+1234567891", "degree2"));
+        lecturers.add(new Lecturer(3L, Arrays.asList(4L, 5L),103L, 2L, "David Taylor", "david.taylor@example.com", "+1234567892", "degree3"));
+        lecturers.add(new Lecturer(4L, Arrays.asList(1L), 104L, 2L, "Laura Evans", "laura.evans@example.com", "+1234567893", "degree4"));
+        lecturers.add(new Lecturer(5L, Arrays.asList(2L, 3L),105L, 3L, "Emily Brown", "emily.brown@example.com", "+1234567894", "degree5"));
         return lecturers;
     }
 
@@ -95,11 +96,11 @@ public class MockDatabase {
 
     private List<Semester> initializeSemesterRepo() {
         List<Semester> semesters = new ArrayList<>();
-        semesters.add(new Semester(1L, 1L, 2024, 1));
-        semesters.add(new Semester(2L, 1L, 2024, 2));
-        semesters.add(new Semester(3L, 2L, 2024, 1));
-        semesters.add(new Semester(4L, 3L, 2025, 1));
-        semesters.add(new Semester(5L, 4L, 2025, 2));
+        semesters.add(new Semester(1L, 1L, 1));
+        semesters.add(new Semester(2L, 1L, 2));
+        semesters.add(new Semester(3L, 2L, 1));
+        semesters.add(new Semester(4L, 3L, 1));
+        semesters.add(new Semester(5L, 4L, 2));
         return semesters;
     }
 
@@ -141,11 +142,11 @@ public class MockDatabase {
     }
     private List<Student> initializeStudentRepo() {
         List<Student> students = new ArrayList<>();
-        students.add(new Student(1L, "Alice Johnson", "+71234567890", "alice.johnson@example.com"));
-        students.add(new Student(2L, "Bob Smith", "+79123456789", "bob.smith@example.com"));
-        students.add(new Student(3L, "Charlie Brown", "+79876543210", "charlie.brown@example.com"));
-        students.add(new Student(4L, "Diana Prince", "+79012345678", "diana.prince@example.com"));
-        students.add(new Student(5L, "Edward Elric", "+71239876543", "edward.elric@example.com"));
+        students.add(new Student(1L, Arrays.asList(1L, 2L, 3L, 4L, 5L), "Alice Johnson", "+71234567890", "alice.johnson@example.com"));
+        students.add(new Student(2L, Arrays.asList(1L, 2L, 3L, 4L, 5L), "Bob Smith", "+79123456789", "bob.smith@example.com"));
+        students.add(new Student(3L, Arrays.asList(1L, 2L, 3L, 4L, 5L),"Charlie Brown", "+79876543210", "charlie.brown@example.com"));
+        students.add(new Student(4L, Arrays.asList(1L, 2L, 3L, 4L, 5L), "Diana Prince", "+79012345678", "diana.prince@example.com"));
+        students.add(new Student(5L, Arrays.asList(1L, 2L, 3L, 4L, 5L), "Edward Elric", "+71239876543", "edward.elric@example.com"));
         return students;
     }
     private List<Subject> initializeSubjectRepo() {

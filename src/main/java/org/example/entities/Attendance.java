@@ -28,7 +28,7 @@ public class Attendance {
     @Override
     public String toString() {
         return "Attendance {id = " + id + ", studentId = " + studentId
-                + ", date = " + date + ", attended = " + attended + "}";
+                + ", date = " + date.format(formatter) + ", attended = " + attended + "}";
     }
 
 }
